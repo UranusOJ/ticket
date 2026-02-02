@@ -1,0 +1,68 @@
+<!-- 设置工单状态 -->
+{% set page_name = "设置工单状态" %}
+{% extends "layout/basic.html" %}
+{% block content %}
+<div class="row">
+    <div class="medium-9 columns">
+        <div class="section">
+            <div class="section__body">
+                <form method="post">
+                    <div class="row">
+                        <div class="medium-6 columns">
+                            {{_('NowState')}}: 
+                            <span>
+                                {% if ticket.state == 0 %}
+                                <span>{{_('Pending')}}</span>
+                                {% endif %}
+
+                                {% if ticket.state == 1 %}
+                                <span style="color:#e74c3c;">{{_('Closed')}}</span>
+                                {% endif %}
+
+                                {% if ticket.state == 2 %}
+                                <span style="color: #f39c11;">{{_('Replied')}}</span>
+                                {% endif %}
+
+                                {% if ticket.state == 3 %}
+                                <span style="color: #ffc116;">{{_('Processing')}}</span>
+                                {% endif %}
+
+
+                                {% if ticket.state == 4 %}
+                                <span style="color: #bfbfbf;">{{_('Suspended')}}</span>
+                                {% endif %}
+
+
+                                {% if ticket.state == 5 %}
+                                <span style="color: #52c41a;">{{_('Finished')}}</span>
+                                {% endif %}
+                            </span>
+                            <br>
+                            <p style="margin-top: 1rem;margin-bottom: 1rem;">{{_('ExpectState')}}: </p>
+                            <label style="margin-bottom: 1rem;">
+                                <select name="state">
+                                    <option value="0">{{_('Pending')}}</option>
+                                    <option value="1">{{_('Closed')}}</option>
+                                    <option value="2">{{_('Replied')}}</span></option>
+                                    <option value="3">{{_('Processing')}}</option>
+                                    <option value="4">{{_('Suspended')}}</option>
+                                    <option value="5">{{_('Finished')}}</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-left: 5px; text-align: left;">
+                        <input type="hidden" name="csrfToken" value="{{ handler.csrfToken }}">
+                        <button type="submit" class="rounded primary button">
+                            {{_('Submit')}}
+                        </button>
+                        <button type="button" class="rounded button" onclick="window.history.go(-1)">
+                            {{_('Cancel')}}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

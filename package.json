@@ -1,0 +1,11 @@
+{
+  "name": "ticket",
+  "version": "1.0.0",
+  "description": "工单",
+  "main": "index.ts",
+  "author": "kv",
+  "license": "MIT",
+  "devDependencies": {
+    "hydrooj": "^5.0.0-beta.16"
+  }
+}

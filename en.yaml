@@ -1,0 +1,24 @@
+Title: Title
+TicketType: Ticket Type
+Submit: Submit
+Cancel: Cancel
+NowState: Current Status
+Pending: Pending
+Closed: Closed
+Replied: Replied/Awaiting Supplement
+Processing: Processing
+Suspended: Suspended
+Finished: Finished
+ExpectState: Desired Status
+EditTicket: Edit Ticket
+SetTicketState: Set Ticket Status
+Reply: Reply
+SubmitReply: Submit Reply
+NoReply: No Replies Yet
+TicketState: Ticket Status
+Creater: Creator
+CreateAt: Created At
+NoTicket: No Tickets Available
+CreateTicket: Create New Ticket
+CreateType: New Ticket Type
+Type: Type

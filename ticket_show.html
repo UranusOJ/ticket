@@ -1,0 +1,112 @@
+<!-- 查看工单 -->
+{% set page_name = "查看工单" %}
+{% extends "layout/basic.html" %}
+{% block content %}
+<div class="row">
+    <div class="medium-9 columns">
+        <div class="section">
+            <div class="section__body">
+                <div class="row">
+                    <div class="medium-12 columns" style="text-align: center;">
+                        <h1>
+                            {{ ticket.title }}
+                        </h1>
+                    </div>
+                </div>
+                <div class="section__body typo richmedia"
+                    style="padding-left:20px;padding-right: 20px;padding-top: 30px;padding-bottom: 20px;">
+                    {{ ticket.content|markdown|safe }}
+                </div>
+
+                <ul class="section__footer supplementary dot list">
+                    <li><a href="/ticket/edit/{{ ticket._id }}">
+                            <span class="icon icon-edit"></span> {{_('EditTicket')}}
+                        </a></li>
+                    <li><a href="/ticket/set-state/{{ ticket._id }}">
+                            <span class="icon icon-copy"></span> {{_('SetTicketState')}}
+                        </a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section__body">
+                <div class="row">
+                    <div class="medium-12 columns"
+                        style="padding-left:20px;padding-right: 20px;padding-top: 30px;padding-bottom: 20px;">
+                        <form method="post">
+                            <h1 class="section__title">{{_('Reply')}}</h1>
+                            {{ form.form_textarea({
+                            columns:8,
+                            label:'',
+                            name:'content',
+                            value:'',
+                            markdown:true,
+                            required:false,
+                            extra_style:'height: 100px;',
+                            extra_textarea_class:'auto-resize'
+                            }) }}
+                            <input type="submit" class="rounded primary button" value="{{_('SubmitReply')}}">
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    {% if not reply.length %}
+                    {{ nothing.render(_('NoReply')) }}
+                    {% else %}
+                    {%- for r in reply -%}
+                    <div class="medium-12 columns"
+                        style="padding-left:20px;padding-right: 20px;padding-top: 30px;padding-bottom: 20px;">
+
+                        <p> {{ user.render_inline(r.owner)}} @{{
+                            datetimeSpan(r.createAt)|safe }} </p>
+                        <div class="section__body typo richmedia">
+                            {{ r.content|markdown|safe }}
+                        </div>
+                    </div>
+                    {%- endfor -%}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="medium-3 columns">
+        <div class="section">
+            <div class="section__body">
+                <p style="margin:1rem"><b>{{_('TicketState')}}: </b>
+                    {% if ticket.state == 0 %}
+                    <span>{{_('Pending')}}</span>
+                    {% endif %}
+
+                    {% if ticket.state == 1 %}
+                    <span style="color:#e74c3c;">{{_('Closed')}}</span>
+                    {% endif %}
+
+                    {% if ticket.state == 2 %}
+                    <span style="color: #f39c11;">{{_('Replied')}}</span>
+                    {% endif %}
+
+                    {% if ticket.state == 3 %}
+                    <span style="color: #ffc116;">{{_('Processing')}}</span>
+                    {% endif %}
+
+
+                    {% if ticket.state == 4 %}
+                    <span style="color: #bfbfbf;">{{_('Suspended')}}</span>
+                    {% endif %}
+
+
+                    {% if ticket.state == 5 %}
+                    <span style="color: #52c41a;">{{_('Finished')}}</span>
+                    {% endif %}
+
+                </p>
+
+                <p style="margin:1rem"><b>{{_('Creater')}}: </b>{{ user.render_inline(udoc)}}</p>
+                <p style="margin:1rem"><b>{{_('TicketType')}}: </b>{{ ticket.type }}</p>
+                <p style="margin:1rem"><b>{{_('CreateAt')}}: </b>{{ datetimeSpan(ticket.createAt)|safe }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

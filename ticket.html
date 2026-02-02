@@ -1,0 +1,70 @@
+<!-- 工单 -->
+{% set page_name = "工单" %}
+{% extends "layout/basic.html" %}
+{% block content %}
+<div class="row">
+    <div class="medium-9 columns">
+        <div class="section">
+            <div class="section__body">
+                <div class="row">
+                    {%- if not tickets.length -%}
+                    {{ nothing.render(_('NoTicket')) }}
+                    {%- else -%}
+                    <div class="medium-12 columns" style="padding-top: 7px;padding-bottom: 5px;">
+                        <hr>
+                    </div>
+                    {%- for t in tickets -%}
+                    <div class="medium-12 columns" style="padding-top: 7px;padding-bottom: 5px;">
+                        <a href="/ticket/show/{{ t._id }}">{{ t.title }}</a>
+
+                        <span style="margin:1rem">
+                            {% if t.state == 0 %}
+                            <span>{{_('Pending')}}</span>
+                            {% endif %}
+
+                            {% if t.state == 1 %}
+                            <span style="color:#e74c3c;">{{_('Closed')}}</span>
+                            {% endif %}
+
+                            {% if t.state == 2 %}
+                            <span style="color: #f39c11;">{{_('Replied')}}</span>
+                            {% endif %}
+
+                            {% if t.state == 3 %}
+                            <span style="color: #ffc116;">{{_('Processing')}}</span>
+                            {% endif %}
+
+
+                            {% if t.state == 4 %}
+                            <span style="color: #bfbfbf;">{{_('Suspended')}}</span>
+                            {% endif %}
+
+
+                            {% if t.state == 5 %}
+                            <span style="color: #52c41a;">{{_('Finished')}}</span>
+                            {% endif %}
+                        </span>
+                        <span style="margin:1rem"> {{ user.render_inline(t.owner)}} @{{
+                            datetimeSpan(t.createAt)|safe }} </span>
+                    </div>
+
+                    <div class="medium-12 columns" style="padding-top: 7px;padding-bottom: 5px;">
+                        <hr>
+                    </div>
+                    {%- endfor -%}
+                    {%- endif -%}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="medium-3 columns">
+        <div class="section">
+            <div class="section__body">
+                <a href="/ticket/create">{{_('CreateTicket')}}</a>
+                <br>
+                <a href="/ticket/type-create">{{_('CreateType')}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
