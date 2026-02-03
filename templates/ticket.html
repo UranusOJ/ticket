@@ -15,8 +15,13 @@
                     </div>
                     {%- for t in tickets -%}
                     <div class="medium-12 columns" style="padding-top: 7px;padding-bottom: 5px;">
-                        <a href="/ticket/show/{{ t._id }}">{{ t.title }}</a>
-
+                        <!-- <a href="/ticket/show/{{ t._id }}">{{ t.title }}</a> -->
+                        <!--
+                        @author: imsunxinhao
+                        time: 2026/2/3
+                        desc: 使用 url 函数，优化代码可读性 
+                        -->
+                        <a href="{{ url('ticket_show', tid=t._id) }}">{{ t.title }}</a>
                         <span style="margin:1rem">
                             {% if t.state == 0 %}
                             <span>{{_('Pending')}}</span>
@@ -44,8 +49,12 @@
                             <span style="color: #52c41a;">{{_('Finished')}}</span>
                             {% endif %}
                         </span>
-                        <span style="margin:1rem"> {{ user.render_inline(t.owner)}} @{{
-                            datetimeSpan(t.createAt)|safe }} </span>
+                        <!--
+                        @author: imsunxinhao
+                        time: 2026/2/3
+                        desc: 优化格式问题，增强代码易读性。
+                        -->
+                        <span style="margin:1rem"> {{ user.render_inline(t.owner)}} @ {{ datetimeSpan(t.createAt)|safe }} </span>
                     </div>
 
                     <div class="medium-12 columns" style="padding-top: 7px;padding-bottom: 5px;">
