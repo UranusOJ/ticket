@@ -1,4 +1,3 @@
-<!-- 查看工单 -->
 {% set page_name = "查看工单" %}
 {% extends "layout/basic.html" %}
 {% block content %}
@@ -22,13 +21,13 @@
                     <!-- <li><a href="/ticket/edit/{{ ticket._id }}">
                             <span class="icon icon-edit"></span> {{_('EditTicket')}}
                         </a></li> -->
-                    <li><a href="{{ url('ticket_edit', tid=ticket.id) }}">
+                    <li><a href="{{ url('ticket_edit', tid=ticket._id) }}">
                             <span class="icon icon-edit"></span> {{_('EditTicket')}}
                         </a></li>
                     <!-- <li><a href="/ticket/set-state/{{ ticket._id }}">
                             <span class="icon icon-copy"></span> {{_('SetTicketState')}}
                         </a></li> -->
-                    <li><a href="{{ url('ticket_setstate', tid=ticket.id) }}">
+                    <li><a href="{{ url('ticket_setstate', tid=ticket._id) }}">
                             <span class="icon icon-copy"></span> {{_('SetTicketState')}}
                         </a></li>
                 </ul>
