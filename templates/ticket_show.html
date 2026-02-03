@@ -19,10 +19,16 @@
                 </div>
 
                 <ul class="section__footer supplementary dot list">
-                    <li><a href="/ticket/edit/{{ ticket._id }}">
+                    <!-- <li><a href="/ticket/edit/{{ ticket._id }}">
+                            <span class="icon icon-edit"></span> {{_('EditTicket')}}
+                        </a></li> -->
+                    <li><a href="{{ url('ticket_edit', tid=ticket.id) }}">
                             <span class="icon icon-edit"></span> {{_('EditTicket')}}
                         </a></li>
-                    <li><a href="/ticket/set-state/{{ ticket._id }}">
+                    <!-- <li><a href="/ticket/set-state/{{ ticket._id }}">
+                            <span class="icon icon-copy"></span> {{_('SetTicketState')}}
+                        </a></li> -->
+                    <li><a href="{{ url('ticket_setstate', tid=ticket.id) }}">
                             <span class="icon icon-copy"></span> {{_('SetTicketState')}}
                         </a></li>
                 </ul>
